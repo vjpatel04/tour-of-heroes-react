@@ -1,0 +1,2 @@
+export const GET_HEROES_SUCCESS = 'GET_HEROES_SUCCESS';
+export const CHANGE_NAME = 'CHANGE_NAME';
