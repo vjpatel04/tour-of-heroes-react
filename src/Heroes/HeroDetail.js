@@ -52,7 +52,7 @@ class HeroDetail extends Component {
                     <label htmlFor='heroName'>Hero Name</label>
                     <input type='text' className='form-control' id='heroName' value={this.state.hero.name} onChange={this.handleChange} />
                 </div>
-                <input type='button' className='btn btn-default' value='Save' onClick={this.handleSave} />
+                <input type='button' className='btn btn-success' value='Save' onClick={this.handleSave} />
                 <input type='button' className='btn btn-default' value='Go Back' onClick={this.goBack} />
             </div>
         );

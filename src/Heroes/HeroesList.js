@@ -21,6 +21,8 @@ const HeroesList = props => {
         let newId = generateId();
         let newName = e.target.heroAdd.value.trim();
         props.actions.addHero({id:newId, name: newName});
+        e.target.heroAdd.value = '';
+        e.target.heroAddBtn.blur();
     }
 
     const generateId = () => {
@@ -45,7 +47,7 @@ const HeroesList = props => {
             <form className='form-group' onSubmit={handleAdd}>
                 <label htmlFor='addHero'>Add Hero</label>
                 <input  name='heroAdd' type='text' className='form-control' id='addHero' />
-                <input type='submit' className='btn btn-default' value='Save' />
+                <input  name='heroAddBtn' type='submit' className='btn btn-success' value='Save' />
             </form>
             <ul className='list-group'>
                 {heroList}
