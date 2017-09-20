@@ -21,8 +21,8 @@ class App extends Component {
       <div className='container-fluid'>
         <Header />
         <main>
-          <Route path='/' exact render={(props) => <Dashboard heroes={this.props.heroes} {...props} />} />
-          <Route path='/heroes' render={(props) => <Heroes heroes={this.props.heroes} actions={this.props.actions} {...props} />} />
+          <Route path='/' exact render={(routeProps) => <Dashboard heroes={this.props.heroes} {...routeProps} />} />
+          <Route path='/heroes' render={(routeProps) => <Heroes heroes={this.props.heroes} actions={this.props.actions} {...routeProps} />} />
         </main>
       </div>
     );
