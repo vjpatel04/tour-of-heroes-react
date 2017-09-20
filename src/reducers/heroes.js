@@ -1,4 +1,4 @@
-import { CHANGE_NAME, GET_HEROES_SUCCESS } from '../constants/ActionTypes';
+import { CHANGE_NAME, GET_HEROES_SUCCESS, ADD_HERO } from '../constants/ActionTypes';
 
 export default function heroAppState(state = [], action) {
 
@@ -6,6 +6,9 @@ export default function heroAppState(state = [], action) {
 
         case GET_HEROES_SUCCESS:
             return [...action.heroes];
+
+        case ADD_HERO:
+            return [...state, { id: action.id, name: action.name }];
 
         case CHANGE_NAME:
             return state.map((hero) => {

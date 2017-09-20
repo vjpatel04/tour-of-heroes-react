@@ -5,6 +5,10 @@ export function changeName({id, name}){
     return { type: types.CHANGE_NAME, id, name };
 }
 
+export function addHero({id, name}){
+    return { type: types.ADD_HERO, id, name };
+}
+
 export function getHeroes(){
     return (dispatch) => {
         fetchHeroes().then((heroes) => {

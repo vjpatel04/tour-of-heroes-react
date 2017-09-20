@@ -8,8 +8,6 @@ const HeroesList = props => {
         return <Loader />
     }
 
-    let addNameInput = null;
-
     const goBack = () => {
         props.history.push('/');
     }
@@ -20,8 +18,14 @@ const HeroesList = props => {
 
     const handleAdd = (e) => {
         e.preventDefault();
+        let newId = generateId();
+        let newName = e.target.heroAdd.value.trim();
+        props.actions.addHero({id:newId, name: newName});
+    }
 
-        console.log(e.target.heroAdd.value);
+    const generateId = () => {
+        let largestId = Math.max(...props.heroes.map( hero => hero.id));
+        return largestId+1;
     }
 
     const heroList = props.heroes.map((hero, index) => {
@@ -40,7 +44,7 @@ const HeroesList = props => {
             </div>
             <form className='form-group' onSubmit={handleAdd}>
                 <label htmlFor='addHero'>Add Hero</label>
-                <input  name='heroAdd' type='text' className='form-control' id='addHero' ref={(addName) => addNameInput = addName} />
+                <input  name='heroAdd' type='text' className='form-control' id='addHero' />
                 <input type='submit' className='btn btn-default' value='Save' />
             </form>
             <ul className='list-group'>
