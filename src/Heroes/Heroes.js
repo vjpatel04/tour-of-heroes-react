@@ -8,8 +8,8 @@ import HeroDetail from './HeroDetail';
 const Heroes = props => {
     return (
         <div>
-            <Route path={`${props.match.path}`} exact render={(routeProps) => <HeroesList heroes={props.heroes} actions={props.actions} {...routeProps} />} />
-            <Route path={`${props.match.path}/:heroId`} component={(routeProps) => <HeroDetail heroes={props.heroes} actions={props.actions} {...routeProps} />} />
+            <Route path={`${props.match.path}`} exact render={(routeProps) => <HeroesList heroes={props.heroes} showLoader={props.showLoader} actions={props.actions} {...routeProps} />} />
+            <Route path={`${props.match.path}/:heroId`} component={(routeProps) => <HeroDetail heroes={props.heroes} showLoader={props.showLoader} actions={props.actions} {...routeProps} />} />
         </div>
     );
 };

@@ -7,7 +7,7 @@ import TopHeroes from './TopHeroes';
 const Dashboard = props => {
     return (
         <div>
-            <Route path={`${props.match.path}`} exact render={(routeProps) => <TopHeroes heroes={props.heroes} {...routeProps} />} />
+            <Route path={`${props.match.path}`} exact render={(routeProps) => <TopHeroes heroes={props.heroes} showLoader={props.showLoader} {...routeProps} />} />
         </div>
     );
 };

@@ -4,7 +4,7 @@ import Loader from '../common/Loader';
 
 const HeroesList = props => {
 
-    if (!props.heroes || props.heroes.length === 0) {
+    if(props.showLoader){
         return <Loader />
     }
 
@@ -30,11 +30,17 @@ const HeroesList = props => {
         return largestId+1;
     }
 
+    const deleteHero = (e, heroId) => {
+        e.stopPropagation();
+        props.actions.deleteHero({ id: heroId });
+    } 
+
     const heroList = props.heroes.map((hero, index) => {
         return (
             <li key={hero.id} className='list-group-item' onClick={() => selectHero(hero.id)}>
                 <span className='badge pull-left'>{index + 1}</span>
                 <span style={{ marginLeft: 7 }}>{hero.name}</span>
+                <span className='glyphicon glyphicon-trash pull-right' onClick={(e) => deleteHero(e, hero.id)} ></span>
             </li>
         );
     });

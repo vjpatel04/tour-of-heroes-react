@@ -12,7 +12,7 @@ const heroes = [
 ];
 
 export default function fetchHeroes() {
-    return new Promise((resolve) => {
+    return new Promise((resolve) => { 
          setTimeout(() => {
             resolve(heroes);
         }, 2000);

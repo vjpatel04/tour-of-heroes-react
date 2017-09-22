@@ -17,7 +17,7 @@ class HeroDetail extends Component {
 
     handleChange = (e) => {
         let newName = e.target.value.trim();
-        const updatedHeroDetails = {...this.state.hero, name: newName}
+        const updatedHeroDetails = { ...this.state.hero, name: newName }
         this.setState({
             hero: updatedHeroDetails
         });
@@ -39,10 +39,10 @@ class HeroDetail extends Component {
             this.setState({ hero });
         }
     }
-    
+
 
     render() {
-        if(!this.props.heroes || this.props.heroes.length === 0){
+        if (this.props.showLoader) {
             return <Loader />
         }
 

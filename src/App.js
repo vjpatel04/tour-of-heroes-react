@@ -21,8 +21,8 @@ class App extends Component {
       <div className='container-fluid'>
         <Header />
         <main>
-          <Route path='/' exact render={(routeProps) => <Dashboard heroes={this.props.heroes} {...routeProps} />} />
-          <Route path='/heroes' render={(routeProps) => <Heroes heroes={this.props.heroes} actions={this.props.actions} {...routeProps} />} />
+          <Route path='/' exact render={(routeProps) => <Dashboard heroes={this.props.heroes} showLoader={this.props.showLoader} {...routeProps} />} />
+          <Route path='/heroes' render={(routeProps) => <Heroes heroes={this.props.heroes} showLoader={this.props.showLoader} actions={this.props.actions} {...routeProps} />} />
         </main>
       </div>
     );
@@ -31,7 +31,8 @@ class App extends Component {
 
 function mapStateToProps(state){
   return {
-    heroes: state.heroAppState
+    heroes: state.heroAppState,
+    showLoader: state.loaderState
   }
 }
 

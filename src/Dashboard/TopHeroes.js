@@ -6,7 +6,7 @@ import './TopHeroes.css';
 
 const TopHeroes = props => {
 
-    if(!props.heroes || props.heroes.length === 0){
+    if(props.showLoader){
         return <Loader />
     }
 

@@ -23,3 +23,4 @@ yarn-error.log*
 # deployment
 .firebaserc
 firebase.json
+firebase-debug.log
