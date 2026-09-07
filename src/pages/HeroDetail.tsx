@@ -1,21 +1,22 @@
 import { useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { Loader } from '../components/Loader'
 import { useHeroes } from '../context/HeroesContext'
 import type { Hero } from '../types'
 
 type HeroDetailFormProps = {
   hero: Hero
+  returnTo: string
   onRename: (id: number, name: string) => void
 }
 
-function HeroDetailForm({ hero, onRename }: HeroDetailFormProps) {
+function HeroDetailForm({ hero, returnTo, onRename }: HeroDetailFormProps) {
   const [name, setName] = useState(hero.name)
   const navigate = useNavigate()
 
   function handleSave() {
     onRename(hero.id, name)
-    navigate(-1)
+    navigate(returnTo)
   }
 
   return (
@@ -36,7 +37,7 @@ function HeroDetailForm({ hero, onRename }: HeroDetailFormProps) {
           autoComplete="off"
         />
         <div className="card-actions justify-end">
-          <button type="button" className="btn btn-ghost" onClick={() => navigate(-1)}>
+          <button type="button" className="btn btn-ghost" onClick={() => navigate(returnTo)}>
             Go back
           </button>
           <button
@@ -56,8 +57,10 @@ function HeroDetailForm({ hero, onRename }: HeroDetailFormProps) {
 export function HeroDetail() {
   const { heroId } = useParams()
   const { heroes, loading, error, renameHero } = useHeroes()
+  const location = useLocation()
   const navigate = useNavigate()
   const hero = heroes.find((item) => String(item.id) === heroId)
+  const returnTo = location.state?.from === '/' ? '/' : '/heroes'
 
   if (loading) return <Loader />
   if (error) {
@@ -82,5 +85,12 @@ export function HeroDetail() {
     )
   }
 
-  return <HeroDetailForm key={hero.id} hero={hero} onRename={renameHero} />
+  return (
+    <HeroDetailForm
+      key={hero.id}
+      hero={hero}
+      returnTo={returnTo}
+      onRename={renameHero}
+    />
+  )
 }

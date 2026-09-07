@@ -62,4 +62,21 @@ describe('Tour of Heroes', () => {
     await user.click(screen.getByRole('button', { name: 'Delete Mr. Nice' }))
     expect(screen.queryByText('Mr. Nice')).not.toBeInTheDocument()
   })
+
+  it('keeps detail navigation in-app when opened directly', async () => {
+    const user = userEvent.setup()
+    renderAt('/heroes/12')
+
+    expect(await screen.findByRole('heading', { name: 'Narco details' })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Heroes' })).toHaveClass('btn-primary')
+    expect(screen.getByRole('checkbox', { name: 'Toggle color theme' })).toBeInTheDocument()
+
+    const nameInput = screen.getByLabelText('Hero name')
+    await user.clear(nameInput)
+    await user.type(nameInput, 'Narco Prime')
+    await user.click(screen.getByRole('button', { name: 'Save' }))
+
+    expect(await screen.findByRole('heading', { name: 'My Heroes' })).toBeInTheDocument()
+    expect(screen.getByText('Narco Prime')).toBeInTheDocument()
+  })
 })

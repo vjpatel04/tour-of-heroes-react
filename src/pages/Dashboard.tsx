@@ -1,10 +1,11 @@
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { topHeroes } from '../api/heroes'
 import { Loader } from '../components/Loader'
 import { useHeroes } from '../context/HeroesContext'
 
 export function Dashboard() {
   const { heroes, loading, error } = useHeroes()
+  const location = useLocation()
   const navigate = useNavigate()
   const featured = topHeroes(heroes)
 
@@ -35,7 +36,11 @@ export function Dashboard() {
                 type="button"
                 aria-label={hero.name}
                 className="card bg-secondary text-secondary-content w-full shadow-md transition hover:-translate-y-0.5 hover:bg-primary hover:text-primary-content"
-                onClick={() => navigate(`/heroes/${hero.id}`)}
+                onClick={() =>
+                  navigate(`/heroes/${hero.id}`, {
+                    state: { from: location.pathname },
+                  })
+                }
               >
                 <div className="card-body items-center text-center py-6">
                   <div className="avatar avatar-placeholder">

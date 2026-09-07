@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Loader } from '../components/Loader'
 import { useHeroes } from '../context/HeroesContext'
 
@@ -22,6 +22,7 @@ function TrashIcon() {
 export function Heroes() {
   const { heroes, loading, error, addHero, deleteHero } = useHeroes()
   const [name, setName] = useState('')
+  const location = useLocation()
   const navigate = useNavigate()
 
   if (loading) return <Loader />
@@ -82,7 +83,11 @@ export function Heroes() {
               <button
                 type="button"
                 className="flex flex-1 items-center gap-3 text-left min-w-0"
-                onClick={() => navigate(`/heroes/${hero.id}`)}
+                onClick={() =>
+                  navigate(`/heroes/${hero.id}`, {
+                    state: { from: location.pathname },
+                  })
+                }
               >
                 <span className="badge badge-primary badge-lg font-bold">{hero.id}</span>
                 <span className="font-medium truncate">{hero.name}</span>

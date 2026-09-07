@@ -36,14 +36,18 @@ export function Header() {
           </NavLink>
           <NavLink
             to="/heroes"
-            end
             className={({ isActive }) => `${navClass(isActive)} join-item`}
           >
             Heroes
           </NavLink>
         </div>
         <label className="swap swap-rotate btn btn-ghost btn-circle ml-2" title="Toggle theme">
-          <input type="checkbox" className="theme-controller" value="night" />
+          <input
+            type="checkbox"
+            className="theme-controller"
+            value="night"
+            aria-label="Toggle color theme"
+          />
           <svg
             className="swap-off size-5 fill-current"
             xmlns="http://www.w3.org/2000/svg"
