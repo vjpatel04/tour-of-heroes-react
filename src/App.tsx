@@ -6,9 +6,9 @@ import { Heroes } from './pages/Heroes'
 
 export default function App() {
   return (
-    <div className="app">
+    <div className="min-h-screen bg-base-200">
       <Header />
-      <main>
+      <main className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6">
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/heroes" element={<Heroes />} />

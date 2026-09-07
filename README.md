@@ -11,6 +11,7 @@ This repository originally shipped a 2017 Create React App + Redux 3 implementat
 - TypeScript
 - React Router 7
 - React Context + `useReducer` for app state
+- Tailwind CSS 4 + daisyUI
 - Vitest + Testing Library
 
 ## Scripts
