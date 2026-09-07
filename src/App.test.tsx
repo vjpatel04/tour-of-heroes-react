@@ -73,8 +73,7 @@ describe('Tour of Heroes', () => {
 
     const nameInput = screen.getByLabelText('Hero name')
     await user.clear(nameInput)
-    await user.type(nameInput, 'Narco Prime')
-    await user.click(screen.getByRole('button', { name: 'Save' }))
+    await user.type(nameInput, 'Narco Prime{Enter}')
 
     expect(await screen.findByRole('heading', { name: 'My Heroes' })).toBeInTheDocument()
     expect(screen.getByText('Narco Prime')).toBeInTheDocument()

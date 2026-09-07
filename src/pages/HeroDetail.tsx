@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type FormEvent } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { Loader } from '../components/Loader'
 import { useHeroes } from '../context/HeroesContext'
@@ -14,14 +14,15 @@ function HeroDetailForm({ hero, returnTo, onRename }: HeroDetailFormProps) {
   const [name, setName] = useState(hero.name)
   const navigate = useNavigate()
 
-  function handleSave() {
+  function handleSave(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
     onRename(hero.id, name)
     navigate(returnTo)
   }
 
   return (
     <section className="card bg-base-100 shadow-sm max-w-lg mx-auto">
-      <div className="card-body gap-4">
+      <form className="card-body gap-4" onSubmit={handleSave}>
         <h2 className="card-title text-2xl">{hero.name} details</h2>
         <p className="text-base-content/60">
           id: <span className="badge badge-secondary">{hero.id}</span>
@@ -41,15 +42,14 @@ function HeroDetailForm({ hero, returnTo, onRename }: HeroDetailFormProps) {
             Go back
           </button>
           <button
-            type="button"
+            type="submit"
             className="btn btn-primary"
-            onClick={handleSave}
             disabled={!name.trim()}
           >
             Save
           </button>
         </div>
-      </div>
+      </form>
     </section>
   )
 }
