@@ -1,0 +1,17 @@
+{
+  "name": "Tour of Heroes (React)",
+  "install": "yarn install",
+  "terminals": [
+    {
+      "name": "dev-server",
+      "command": "BROWSER=none PORT=3000 yarn start",
+      "description": "Create React App development server on http://localhost:3000"
+    }
+  ],
+  "ports": [
+    {
+      "name": "web",
+      "port": 3000
+    }
+  ]
+}
