@@ -1,0 +1,96 @@
+import { useState, type FormEvent } from 'react'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { Loader } from '../components/Loader'
+import { useHeroes } from '../context/HeroesContext'
+import type { Hero } from '../types'
+
+type HeroDetailFormProps = {
+  hero: Hero
+  returnTo: string
+  onRename: (id: number, name: string) => void
+}
+
+function HeroDetailForm({ hero, returnTo, onRename }: HeroDetailFormProps) {
+  const [name, setName] = useState(hero.name)
+  const navigate = useNavigate()
+
+  function handleSave(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    onRename(hero.id, name)
+    navigate(returnTo)
+  }
+
+  return (
+    <section className="card bg-base-100 shadow-sm max-w-lg mx-auto">
+      <form className="card-body gap-4" onSubmit={handleSave}>
+        <h2 className="card-title text-2xl">{hero.name} details</h2>
+        <p className="text-base-content/60">
+          id: <span className="badge badge-secondary">{hero.id}</span>
+        </p>
+        <label htmlFor="detail-name" className="label font-semibold">
+          Hero name
+        </label>
+        <input
+          id="detail-name"
+          className="input input-bordered w-full"
+          value={name}
+          onChange={(event) => setName(event.target.value)}
+          autoComplete="off"
+        />
+        <div className="card-actions justify-end">
+          <button type="button" className="btn btn-ghost" onClick={() => navigate(returnTo)}>
+            Go back
+          </button>
+          <button
+            type="submit"
+            className="btn btn-primary"
+            disabled={!name.trim()}
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </section>
+  )
+}
+
+export function HeroDetail() {
+  const { heroId } = useParams()
+  const { heroes, loading, error, renameHero } = useHeroes()
+  const location = useLocation()
+  const navigate = useNavigate()
+  const hero = heroes.find((item) => String(item.id) === heroId)
+  const returnTo = location.state?.from === '/' ? '/' : '/heroes'
+
+  if (loading) return <Loader />
+  if (error) {
+    return (
+      <div role="alert" className="alert alert-error">
+        <span>{error}</span>
+      </div>
+    )
+  }
+
+  if (!hero) {
+    return (
+      <section className="card bg-base-100 shadow-sm max-w-lg mx-auto">
+        <div className="card-body items-center text-center gap-3">
+          <h2 className="card-title text-2xl">Hero not found</h2>
+          <p className="text-base-content/60">That hero is not in the roster.</p>
+          <button type="button" className="btn btn-primary" onClick={() => navigate('/heroes')}>
+            Back to heroes
+          </button>
+        </div>
+      </section>
+    )
+  }
+
+  return (
+    <HeroDetailForm
+      key={hero.id}
+      hero={hero}
+      returnTo={returnTo}
+      onRename={renameHero}
+    />
+  )
+}

@@ -1,8 +1,40 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+@import "tailwindcss";
+@plugin "daisyui/index.js" {
+  themes: night --prefersdark;
 }
-.page-header{
-  border-bottom: none;
+
+@plugin "daisyui/theme/index.js" {
+  name: "heroes";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  --color-base-100: oklch(98.5% 0.012 85);
+  --color-base-200: oklch(95% 0.018 80);
+  --color-base-300: oklch(90% 0.025 78);
+  --color-base-content: oklch(24% 0.03 40);
+  --color-primary: oklch(48% 0.155 25);
+  --color-primary-content: oklch(98% 0.01 85);
+  --color-secondary: oklch(42% 0.055 235);
+  --color-secondary-content: oklch(98% 0.01 235);
+  --color-accent: oklch(68% 0.13 70);
+  --color-accent-content: oklch(22% 0.04 70);
+  --color-neutral: oklch(28% 0.025 40);
+  --color-neutral-content: oklch(97% 0.01 85);
+  --color-info: oklch(58% 0.1 240);
+  --color-info-content: oklch(98% 0.01 240);
+  --color-success: oklch(55% 0.12 150);
+  --color-success-content: oklch(98% 0.01 150);
+  --color-warning: oklch(78% 0.13 80);
+  --color-warning-content: oklch(25% 0.05 80);
+  --color-error: oklch(55% 0.18 25);
+  --color-error-content: oklch(98% 0.01 25);
+  --radius-selector: 1rem;
+  --radius-field: 0.75rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
 }
