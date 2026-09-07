@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
 import { vi } from 'vitest'
@@ -53,7 +53,7 @@ describe('Tour of Heroes', () => {
     const nameInput = screen.getByLabelText('Hero name')
     await user.clear(nameInput)
     await user.type(nameInput, 'Magneta')
-    await user.click(screen.getByRole('button', { name: 'Save' }))
+    await user.click(screen.getByRole('button', { name: 'Save changes' }))
 
     expect(await screen.findByRole('heading', { name: 'My Heroes' })).toBeInTheDocument()
     expect(screen.getByText('Magneta')).toBeInTheDocument()
@@ -68,7 +68,11 @@ describe('Tour of Heroes', () => {
     renderAt('/heroes/12')
 
     expect(await screen.findByRole('heading', { name: 'Narco details' })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Heroes' })).toHaveClass('btn-primary')
+    const primaryNav = screen.getByRole('navigation', { name: 'Primary' })
+    expect(within(primaryNav).getByRole('link', { name: 'Heroes' })).toHaveAttribute(
+      'aria-current',
+      'page',
+    )
     expect(screen.getByRole('checkbox', { name: 'Toggle color theme' })).toBeInTheDocument()
 
     const nameInput = screen.getByLabelText('Hero name')
