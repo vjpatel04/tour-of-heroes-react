@@ -1,0 +1,17 @@
+{
+  "name": "Tour of Heroes",
+  "install": "yarn install --frozen-lockfile",
+  "terminals": [
+    {
+      "name": "dev-server",
+      "command": "BROWSER=none PORT=3000 HOST=0.0.0.0 yarn start",
+      "description": "Create React App development server on http://localhost:3000 with hot reloading."
+    }
+  ],
+  "ports": [
+    {
+      "name": "dev-server",
+      "port": 3000
+    }
+  ]
+}
